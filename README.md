@@ -1,15 +1,15 @@
 # WeaponSpawner
 A simple SourceMod plugin to spawn weapons. Now dependency free!
 
-## Installation
+### Installation
 1) Add a database entry under "hl_weaponspawner" (View sample databases.cfg below.)
 2) Move the plugin into your sourcemod/plugins/ folder
 
-## Usage
+### Usage
 Type !addweapons or sm_addweapons to open up the menu and aim where you'd like to place
 the weapon!
 
-## Sample Databases.cfg
+### Sample Databases.cfg
 ```
 "Databases"
 {
