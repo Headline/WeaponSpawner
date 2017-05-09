@@ -101,7 +101,7 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 			
 			Weapon weapon = new Weapon(classname, vec);
 			AddWeaponToSQL(weapon, g_hDatabase);
-			SpawnWeapon(weapon);
+			weapon.Spawn();
 			list.Push(weapon);
 		}
 		case MenuAction_End:

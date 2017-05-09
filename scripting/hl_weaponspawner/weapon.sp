@@ -9,11 +9,9 @@ methodmap Weapon < KeyValues
 	}
 	
 	/* Methods */
-	public float[3] GetVec()
+	public void GetVec(float[3] vec)
 	{
-		float vec[3];
 		this.GetVector(NULL_STRING, vec);
-		return vec;
 	}
 	
 	public void GetClassname(char[] buffer, int maxlength)
@@ -26,10 +24,10 @@ methodmap Weapon < KeyValues
 	public bool Spawn()
 	{
 		char classname[32];
-		flat vec[3];
+		float vec[3];
 		int entity;
 		
-		vec = this.GetVec();
+		this.GetVec(vec);
 		this.GetClassname(classname, sizeof(classname));
 		
 		entity = CreateEntityByName(classname);
