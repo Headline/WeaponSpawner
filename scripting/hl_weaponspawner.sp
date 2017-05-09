@@ -1,6 +1,9 @@
 #include <sourcemod>
 #include <sdktools>
 
+#pragma semicolon 1
+#pragma newdecls required
+
 ArrayList list;
 Database g_hDatabase;
 
@@ -71,7 +74,7 @@ public Action Command_AddWeapons(int client, int args)
 	return Plugin_Handled;
 }
 
-OpenWeaponMenu(int client)
+void OpenWeaponMenu(int client)
 {
 	Menu menu = CreateMenu(WeaponMenu_Callback, MenuAction_Select | MenuAction_End | MenuAction_DisplayItem | MenuAction_Cancel);
 	SetMenuTitle(menu, "Select Weapon: ");
@@ -113,7 +116,7 @@ public Action Event_RoundStart(Event event, const char[] name, bool dontBroadcas
 	SpawnWeapons(list);
 }
 
-float[3] GetClientAimPosition(client) 
+float[3] GetClientAimPosition(int client) 
 { 
 	float start[3], angle[3], end[3]; 
 	
