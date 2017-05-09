@@ -113,7 +113,7 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 
 public Action Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 {
-	SpawnWeapons(list);
+	Weapon.SpawnWeapons(list);
 }
 
 float[3] GetClientAimPosition(int client) 
@@ -136,32 +136,6 @@ float[3] GetClientAimPosition(int client)
 public bool TraceEntityFilterPlayer(int entity, int contentsMask)  
 { 
 	return entity > MaxClients; 
-} 
-
-void SpawnWeapons(ArrayList array)
-{
-	for (int i = 0; i < array.Length; i++)
-	{
-		SpawnWeapon(array.Get(i));
-	}
-}
-
-void SpawnWeapon(Weapon weapon)
-{
-	char classname[32];
-	float vec[3];
-	int entity;
-	
-	weapon.GetSectionName(classname, sizeof(classname));
-	weapon.GetVector(NULL_STRING, vec);
-	
-	entity = CreateEntityByName(classname);
-	if (entity != -1)
-	{
-		TeleportEntity(entity, vec, NULL_VECTOR, NULL_VECTOR);
-		DispatchSpawn(entity);
-	}
-	
 }
 
 char[] GetMapName()
