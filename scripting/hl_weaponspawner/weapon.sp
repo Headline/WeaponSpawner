@@ -46,6 +46,17 @@ methodmap Weapon < KeyValues
 	}
 	
 	/* Static Methods */
+	
+	public static void SpawnWeapons(ArrayList array)
+	{
+		Weapon weapon;
+		for (int i = 0; i < array.Length; i++)
+		{
+			weapon = array.Get(i);
+			weapon.Spawn();
+		}
+	}
+	
 	public static Weapon EntityToWeapon(int entity)
 	{
 		if (!IsValidEntity(entity))
