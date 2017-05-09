@@ -12,13 +12,13 @@ methodmap Weapon < KeyValues
 	public float[3] GetVec()
 	{
 		float vec[3];
-		kv.GetVector(NULL_STRING, vec);
+		this.GetVector(NULL_STRING, vec);
 		return vec;
 	}
 	
 	public void GetClassname(char[] buffer, int maxlength)
 	{
-		kv.GetSectionName(buffer, maxlength);
+		this.GetSectionName(buffer, maxlength);
 	}
 	
 	// DESCRIPTION: Spawns a weapon using it's vector and classname
