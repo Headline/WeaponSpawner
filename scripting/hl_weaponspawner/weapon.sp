@@ -1,15 +1,8 @@
 methodmap Weapon < KeyValues 
 {
-	/* Constructor */
-	public Weapon(const char[] classname, const float vec[3])
-	{
-		KeyValues kv = new KeyValues(classname);
-		kv.SetVector(NULL_STRING, vec); 
-		return view_as<Weapon>(kv);
-	}
-	
+
 	/* Methods */
-	public void GetVec(float[3] vec)
+	public void GetVector(float[3] vec)
 	{
 		this.GetVector(NULL_STRING, vec);
 	}
@@ -27,7 +20,7 @@ methodmap Weapon < KeyValues
 		float vec[3];
 		int entity;
 		
-		this.GetVec(vec);
+		this.GetVector(vec);
 		this.GetClassname(classname, sizeof(classname));
 		
 		entity = CreateEntityByName(classname);
@@ -43,8 +36,15 @@ methodmap Weapon < KeyValues
 		}
 	}
 	
-	/* Static Methods */
+	/* Constructor */
+	public Weapon(const char[] classname, const float vec[3])
+	{
+		KeyValues kv = new KeyValues(classname);
+		kv.SetVector(NULL_STRING, vec); 
+		return view_as<Weapon>(kv);
+	}
 	
+	/* Static Methods */
 	public static void SpawnWeapons(ArrayList array)
 	{
 		Weapon weapon;

@@ -40,7 +40,7 @@ void AddWeaponToSQL(Weapon weapon, Database database)
 	float vec[3];
 	
 	weapon.GetSectionName(classname, sizeof(classname));
-	weapon.GetVector(NULL_STRING, vec);
+	weapon.GetVector(vec);
 	
 	char query[300];
 	Format(query, sizeof(query), "INSERT INTO hl_weaponspawner (map, classname, x, y, z) VALUES(\"%s\", \"%s\", %f, %f, %f)", GetMapName(), classname, vec[0], vec[1], vec[2]);
