@@ -1,6 +1,9 @@
 #include <sourcemod>
 #include <sdktools>
 
+#pragma semicolon 1
+#pragma newdecls required
+
 ArrayList list;
 Database g_hDatabase;
 
@@ -71,7 +74,7 @@ public Action Command_AddWeapons(int client, int args)
 	return Plugin_Handled;
 }
 
-OpenWeaponMenu(int client)
+void OpenWeaponMenu(int client)
 {
 	Menu menu = CreateMenu(WeaponMenu_Callback, MenuAction_Select | MenuAction_End | MenuAction_DisplayItem | MenuAction_Cancel);
 	SetMenuTitle(menu, "Select Weapon: ");
@@ -110,10 +113,10 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 
 public Action Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 {
-	SpawnWeapons(list);
+	Weapon.SpawnWeapons(list);
 }
 
-float[3] GetClientAimPosition(client) 
+float[3] GetClientAimPosition(int client) 
 { 
 	float start[3], angle[3], end[3]; 
 	
@@ -133,32 +136,6 @@ float[3] GetClientAimPosition(client)
 public bool TraceEntityFilterPlayer(int entity, int contentsMask)  
 { 
 	return entity > MaxClients; 
-} 
-
-void SpawnWeapons(ArrayList array)
-{
-	for (int i = 0; i < array.Length; i++)
-	{
-		SpawnWeapon(array.Get(i));
-	}
-}
-
-void SpawnWeapon(Weapon weapon)
-{
-	char classname[32];
-	float vec[3];
-	int entity;
-	
-	weapon.GetSectionName(classname, sizeof(classname));
-	weapon.GetVector(NULL_STRING, vec);
-	
-	entity = CreateEntityByName(classname);
-	if (entity != -1)
-	{
-		TeleportEntity(entity, vec, NULL_VECTOR, NULL_VECTOR);
-		DispatchSpawn(entity);
-	}
-	
 }
 
 char[] GetMapName()
