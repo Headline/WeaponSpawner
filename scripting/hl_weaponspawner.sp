@@ -17,6 +17,7 @@
  
 #include <sourcemod>
 #include <sdktools>
+#include <csgo_items>
 
 #pragma semicolon 1
 #pragma newdecls required
@@ -33,6 +34,14 @@ char weapons[36][32] = {
 
 #include "hl_weaponspawner/weapon.sp"
 #include "hl_weaponspawner/sql.sp"
+
+
+public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) 
+{
+	MarkNativeAsOptional("CSGO_GetItemDefinitionIndexByName");
+
+	return APLRes_Success;
+}
 
 public void OnPluginStart()
 {
@@ -118,7 +127,9 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 			
 			Weapon weapon = new Weapon(classname, vec);
 			AddWeaponToSQL(weapon, g_hDatabase);
-			weapon.Spawn();
+			
+			bool csgoItemsExists = GetFeatureStatus(FeatureType_Native, "CSGO_GetItemDefinitionIndexByName") == FeatureStatus_Available;
+			weapon.Spawn(csgoItemsExists);
 			list.Push(weapon);
 		}
 		case MenuAction_End:
@@ -130,7 +141,8 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 
 public Action Event_RoundStart(Event event, const char[] name, bool dontBroadcast)
 {
-	Weapon.SpawnWeapons(list);
+	bool csgoItemsExists = GetFeatureStatus(FeatureType_Native, "CSGO_GetItemDefinitionIndexByName") == FeatureStatus_Available;
+	Weapon.SpawnWeapons(list, csgoItemsExists);
 }
 
 float[3] GetClientAimPosition(int client) 

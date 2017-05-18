@@ -31,7 +31,7 @@ methodmap Weapon < KeyValues
 	
 	// DESCRIPTION: Spawns a weapon using it's vector and classname
 	// POSTCONDITION: Returns true if sucessfully spawned
-	public bool Spawn()
+	public bool Spawn(bool csgoitems)
 	{
 		char classname[32];
 		float vec[3];
@@ -44,6 +44,10 @@ methodmap Weapon < KeyValues
 		if (entity != -1)
 		{
 			TeleportEntity(entity, vec, NULL_VECTOR, NULL_VECTOR);
+			if (csgoitems)
+			{
+				SetEntProp(entity, Prop_Send, "m_iItemDefinitionIndex", CSGO_GetItemDefinitionIndexByName(classname));
+			}
 			DispatchSpawn(entity);
 			return true;
 		}
@@ -62,13 +66,13 @@ methodmap Weapon < KeyValues
 	}
 	
 	/* Static Methods */
-	public static void SpawnWeapons(ArrayList array)
+	public static void SpawnWeapons(ArrayList array, bool csgoItems)
 	{
 		Weapon weapon;
 		for (int i = 0; i < array.Length; i++)
 		{
 			weapon = array.Get(i);
-			weapon.Spawn();
+			weapon.Spawn(csgoItems);
 		}
 	}
 	
