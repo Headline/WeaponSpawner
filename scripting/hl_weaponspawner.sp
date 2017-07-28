@@ -131,6 +131,7 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 			bool csgoItemsExists = GetFeatureStatus(FeatureType_Native, "CSGO_GetItemDefinitionIndexByName") == FeatureStatus_Available;
 			weapon.Spawn(csgoItemsExists);
 			list.Push(weapon);
+			OpenWeaponMenu(param1);
 		}
 		case MenuAction_End:
 		{
