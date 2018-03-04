@@ -100,7 +100,7 @@ public Action Command_AddWeapons(int client, int args)
 	return Plugin_Handled;
 }
 
-void OpenWeaponMenu(int client)
+void OpenWeaponMenu(int client, int item = 0)
 {
 	Menu menu = CreateMenu(WeaponMenu_Callback, MenuAction_Select | MenuAction_End | MenuAction_DisplayItem | MenuAction_Cancel);
 	SetMenuTitle(menu, "Select Weapon: ");
@@ -111,7 +111,7 @@ void OpenWeaponMenu(int client)
 	}
 
 	menu.ExitBackButton = false;
-	menu.Display(client, MENU_TIME_FOREVER);
+	menu.DisplayAt(client, item, MENU_TIME_FOREVER);
 }
 
 public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int param2)
@@ -131,7 +131,7 @@ public int WeaponMenu_Callback(Menu menu, MenuAction action, int param1, int par
 			bool csgoItemsExists = GetFeatureStatus(FeatureType_Native, "CSGO_GetItemDefinitionIndexByName") == FeatureStatus_Available;
 			weapon.Spawn(csgoItemsExists);
 			list.Push(weapon);
-			OpenWeaponMenu(param1);
+			OpenWeaponMenu(param1, menu.Selection);
 		}
 		case MenuAction_End:
 		{
