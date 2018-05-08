@@ -35,6 +35,14 @@ char weapons[36][32] = {
 #include "hl_weaponspawner/weapon.sp"
 #include "hl_weaponspawner/sql.sp"
 
+public Plugin myinfo =
+{
+	name = "[CS:GO/CS:S] Weapon Spawner",
+	author = "Headline",
+	description = "Allow server operators to add weapons to maps who have none",
+	version = "1.0",
+	url = "http://michaelwflaherty.com"
+};
 
 public APLRes AskPluginLoad2(Handle myself, bool late, char[] error, int err_max) 
 {
